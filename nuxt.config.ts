@@ -5,7 +5,7 @@ import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
   ],
   build: {
     transpile:
@@ -17,6 +17,9 @@ export default defineNuxtConfig({
           '@juggle/resize-observer'
         ]
         : ['@juggle/resize-observer']
+  },
+  experimental: {
+    reactivityTransform: true,
   },
   vite: {
     optimizeDeps: {
