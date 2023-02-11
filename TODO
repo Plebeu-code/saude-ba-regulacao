@@ -1,0 +1,16 @@
+Sistema de notificações:
+  ☐ Notificações de boas vindas
+  ☐ Notificações de erro, sucess, warning
+
+Mensagens: 
+  ☐ O Número da Ocorrência, com o Dígito Verificador, devem ter no mínimo 8 números.
+  ☐ Procure informações na Unidade de Origem.
+  ☐ O Número da Ocorrência está com o Dígito Verificador inválido.
+  ☐ Procure informações na Unidade de Origem.
+
+Funções:
+  ☐ Captch do google
+  ☐ API NODE
+  ☐ PAGE de resultado
+  ☐ Informativo de status
+  ☐ Auditoria, logs, ips, hora/data, email, ocorrência, dispositivo, tempo de atividade
