@@ -8,7 +8,8 @@ const {
   DB_PASSWORD,
   DB_HOST,
   DB_DATABASE,
-  DB_PORT
+  DB_PORT,
+  DB_PLATFORM
 } = process.env
 
 export default {
@@ -21,6 +22,7 @@ export default {
       host: DB_HOST,
       database: DB_DATABASE,
       port: DB_PORT ?? 3306,
+      ssl: DB_PLATFORM === "planetscale"
     }
   },
 
