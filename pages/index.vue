@@ -1,15 +1,15 @@
 <template>
-  <div>
-    
+  <div class="w-screen h-screen bg-zinc-700">
+    <n-button type="primary" @click="dialog.info({ content: 'Test', closable: true })">test</n-button>
   </div>
 </template>
 
-
 <script lang="ts" setup>
-import { useMessage } from 'naive-ui';
 
 const messagem = useMessage()
-messagem.info('test')
 
+const dialog = useDialog()
+
+messagem.info('Yves')
 
 </script>
