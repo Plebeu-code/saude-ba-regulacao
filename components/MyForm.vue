@@ -1,21 +1,23 @@
 <template>
-  <div class="h-[480px] bg-[#FEFCFE] w-full max-w-[600px] rounded relative flex items-center shadow-2xl">
-    <img src="/imgs/central.png" alt="Logo do estado da bahia" class="h-[200px] top-[-100px] left-[70px] absolute">
-    <n-form ref="formRef" :model="formData" :rules="rules"
-      class=" w-full flex flex-col justify-center items-center h-[60%]" size="large">
-
-      <n-form-item label="Informe o Número da Regulação" path="name" class="mb-[20px] w-[300px]">
-        <n-input placeholder="a" class="w-full" v-model:value="formData.name" />
-      </n-form-item>
-
-      <VueRecaptcha @verify="verifyMethod" @error="verifyError" ref="formCaptchaRef"
-        sitekey="6LexP3EkAAAAAN0ByhaeFbnDchRJWkhQU5K58PpT" />
-      <n-form-item>
-        <n-button :disabled="disabledSearch" @click="handlerSubmit" strong color="#39A05E" class="w-[200px] bg-[#39A05E] ">
-          Pesquisar
-        </n-button>
-      </n-form-item>
-    </n-form>
+  <div class="h-full w-full flex items-center justify-center">
+    <div class="h-[480px] bg-[#FEFCFE] w-full max-w-[600px] rounded relative flex items-center shadow-2xl">
+      <img src="/imgs/central.png" alt="Logo do estado da bahia" class="h-[200px] top-[-100px] left-[70px] absolute">
+      <n-form ref="formRef" :model="formData" :rules="rules"
+        class=" w-full flex flex-col justify-center items-center h-[60%]" size="large">
+  
+        <n-form-item label="Informe o Número da Regulação" path="name" class="mb-[20px] w-[300px]">
+          <n-input placeholder="a" class="w-full" v-model:value="formData.name" />
+        </n-form-item>
+  
+        <VueRecaptcha @verify="verifyMethod" @error="verifyError" ref="formCaptchaRef"
+          sitekey="6LexP3EkAAAAAN0ByhaeFbnDchRJWkhQU5K58PpT" />
+        <n-form-item>
+          <n-button :disabled="disabledSearch" @click="handlerSubmit" strong color="#39A05E" class="w-[200px] bg-[#39A05E] ">
+            Pesquisar
+          </n-button>
+        </n-form-item>
+      </n-form>
+    </div>
   </div>
 </template>
 
