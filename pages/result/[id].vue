@@ -8,6 +8,10 @@
 <script setup lang="ts">
 const loading = useLoadingBar()
 
+const route = useRoute()
+
+console.log(route.params.id);
+
 onMounted(() => {
   loading.start()
   setTimeout(() => {
