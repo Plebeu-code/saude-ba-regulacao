@@ -1,28 +1,23 @@
 <template>
   <div class="h-full w-full flex items-center justify-center">
-    <div class="h-[480px] bg-[#FEFCFE] w-full max-w-[600px] rounded relative flex items-center shadow-2xl">
+    <div class="h-[380px] bg-[#FEFCFE] w-[500px]  max-[470px]:w-[80%] mb-[150px] max-[400px]:mb-[0px] rounded relative flex items-end shadow-2xl">
       <img src="/imgs/central.png" alt="Logo do estado da bahia"
-        class="h-[200px] top-[-100px] left-[70px] absolute mb-8">
+        class="h-[130px] top-[-80px] left-[18%]  absolute mb-8 max-[470px]:hidden">
       <n-form ref="formRef" :model="formData" :rules="formRules"
-        class="w-full flex flex-col justify-center items-center h-[60%]" size="large">
-
-        <n-form-item label="Informe o Número da Regulação" path="regulationNumber" class="mb-[20px] w-[300px]">
+        class="w-full flex flex-col justify-center items-center h-[60%] mb-[40px]" size="large">
+        <n-form-item label="Informe o Número da Regulação" path="regulationNumber" class="w-[80%]">
           <n-input-number placeholder="" :show-button="false" class="w-full"
             v-model:value="formData.regulationNumber" />
         </n-form-item>
-
+        <n-divider  class="w-[80%] m-[0px] p-[0]" />
         <ClientOnly>
-
           <template #fallback>
             <n-alert title="Captcha" type="info">
               Será carregado em instantes ...
             </n-alert>
           </template>
-
-          <VueRecaptcha @verify="captchaVerify" @error="captchaError" ref="formCaptchaRef" :sitekey="captchaId" />
-
+          <VueRecaptcha  @verify="captchaVerify" @error="captchaError" ref="formCaptchaRef" :sitekey="captchaId" />
         </ClientOnly>
-
         <n-form-item>
           <n-button :disabled="!toggleButton" @click="handleSubmit" strong color="#39A05E"
             class="w-[200px] bg-[#39A05E] ">
@@ -104,3 +99,10 @@ function handleSubmit() {
   })
 }
 </script>
+
+<style>
+.n-divider:not(.n-divider--vertical) {
+  margin: 0 0 25px 0 !important;
+}
+
+</style>

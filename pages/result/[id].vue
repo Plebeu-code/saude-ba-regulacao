@@ -137,7 +137,7 @@
 <script setup lang="ts">
 const loading = useLoadingBar()
 const route = useRoute()
-const value = $ref(null)
+const value = $ref<string | null>(null)
 const hasData = $computed(() => !!value)
 
 console.log(route.params.id)
