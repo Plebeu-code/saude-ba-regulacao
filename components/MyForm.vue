@@ -30,6 +30,7 @@
           </n-button>
         </n-form-item>
       </n-form>
+      <n-button @click="!!data ? refresh() : execute()">test</n-button>
     </div>
   </div>
 </template>
@@ -38,6 +39,21 @@
 import type { FormInst, FormRules } from 'naive-ui';
 
 import { VueRecaptcha } from "vue-recaptcha"
+
+const { execute, refresh, data } = useAsyncData(
+  ()=> 
+    $fetch("/api/regulation", 
+    {
+      onRequest() {
+        console.log("onRequest")
+      },
+      onResponseError(context) {
+        console.log("onResponseError", context)
+      },
+    }
+  ), 
+  { immediate: false }
+)
 
 const { captchaId } = useRuntimeConfig()
 
