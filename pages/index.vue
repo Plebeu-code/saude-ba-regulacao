@@ -1,6 +1,5 @@
 <template>
-  <div class="w-screen h-screen justify-between bg-[#C9E1E3] items-center flex flex-col">
-    <Header />
+  <div class="w-screen h-screen bg-[#C9E1E3] items-center flex flex-col">
     <MyForm />
     <Footer />
   </div>

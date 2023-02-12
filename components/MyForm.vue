@@ -1,32 +1,36 @@
 <template>
-  <div class="h-[480px] bg-[#FEFCFE] w-full max-w-[600px] rounded relative flex items-center shadow-2xl">
-    <img src="/imgs/central.png" alt="Logo do estado da bahia" class="h-[200px] top-[-100px] left-[70px] absolute mb-8">
-    <n-form ref="formRef" :model="formData" :rules="formRules"
-      class="w-full flex flex-col justify-center items-center h-[60%]" size="large">
+  <div class="h-full w-full flex items-center justify-center">
+    <div class="h-[480px] bg-[#FEFCFE] w-full max-w-[600px] rounded relative flex items-center shadow-2xl">
+      <img src="/imgs/central.png" alt="Logo do estado da bahia"
+        class="h-[200px] top-[-100px] left-[70px] absolute mb-8">
+      <n-form ref="formRef" :model="formData" :rules="formRules"
+        class="w-full flex flex-col justify-center items-center h-[60%]" size="large">
 
-      <n-form-item label="Informe o Número da Regulação" path="regulationNumber" class="mb-[20px] w-[300px]">
-        <n-input-number placeholder="" :show-button="false" class="w-full" v-model:value="formData.regulationNumber" />
-      </n-form-item>
+        <n-form-item label="Informe o Número da Regulação" path="regulationNumber" class="mb-[20px] w-[300px]">
+          <n-input-number placeholder="" :show-button="false" class="w-full"
+            v-model:value="formData.regulationNumber" />
+        </n-form-item>
 
-      <ClientOnly>
+        <ClientOnly>
 
-        <template #fallback>
-          <n-alert title="Captcha" type="info" >
-            Será carregado em instantes ...
-          </n-alert>
-        </template>
+          <template #fallback>
+            <n-alert title="Captcha" type="info">
+              Será carregado em instantes ...
+            </n-alert>
+          </template>
 
-        <VueRecaptcha @verify="captchaVerify" @error="captchaError" ref="formCaptchaRef"
-          :sitekey="captchaId" />
+          <VueRecaptcha @verify="captchaVerify" @error="captchaError" ref="formCaptchaRef" :sitekey="captchaId" />
 
-      </ClientOnly>
+        </ClientOnly>
 
-      <n-form-item>
-        <n-button :disabled="!toggleButton" @click="handleSubmit" strong color="#39A05E" class="w-[200px] bg-[#39A05E] ">
-          Pesquisar
-        </n-button>
-      </n-form-item>
-    </n-form>
+        <n-form-item>
+          <n-button :disabled="!toggleButton" @click="handleSubmit" strong color="#39A05E"
+            class="w-[200px] bg-[#39A05E] ">
+            Pesquisar
+          </n-button>
+        </n-form-item>
+      </n-form>
+    </div>
   </div>
 </template>
 
@@ -71,7 +75,7 @@ let formRules: FormRules = $ref<FormRules>({
 
 // ANCHOR - Calculos
 
-let toggleButton = $computed(() => 
+let toggleButton = $computed(() =>
   (
     !!formData.regulationNumber &&
     formData.regulationNumber! > 0
@@ -92,7 +96,7 @@ function captchaError(error: string) {
 function handleSubmit() {
   formRef?.validate((err) => {
     console.log(err);
-    
+
     if (err) {
       message.error("Há Campos Inválidos!")
     }
