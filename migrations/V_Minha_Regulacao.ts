@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     table.collate("utf8mb4_0900_ai_ci");
     table.charset("utf8mb4");
 
-    table.increments('CodOcorrencia', { primaryKey: true });
+    table.integer('CodOcorrencia').primary().notNullable();
     table.string('Paciente', 100).notNullable();
     table.string('DescMotivoSol', 140).notNullable();
     table.datetime('DataAbre').notNullable();

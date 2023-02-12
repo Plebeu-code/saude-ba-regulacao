@@ -42,6 +42,11 @@ export default defineNuxtConfig({
         imports: ["useLoadingBar", "useMessage", "useNotification", "useDialog"]
       }
     ]
+  },
+  runtimeConfig: {
+    public: {
+      captchaId: "6LexP3EkAAAAAN0ByhaeFbnDchRJWkhQU5K58PpT",
+    }
   }
 })
 
