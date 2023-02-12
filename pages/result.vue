@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-screen  bg-[#C9E1E3] items-center flex flex-col">
+  <div class="w-screen h-screen max-[400px]:h-auto  bg-[#C9E1E3] items-center flex flex-col">
     <ResultFormRequest />
     <Footer />
   </div>

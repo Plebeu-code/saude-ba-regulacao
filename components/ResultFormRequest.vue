@@ -1,7 +1,7 @@
 <template>
-  <div class="h-full w-full flex items-center justify-center" >
+  <div class="h-full w-full flex items-center justify-center max-[415px]:my-[100px] mb-[150px] " >
     <div
-      class="h-[550px] bg-[#FEFCFE] flex-col w-[600px] min-w-[400px] max-w-[35%] rounded justify-around flex shadow-2xl px-3">
+      class="h-[550px] bg-[#FEFCFE] flex-col w-[600px] min-w-[400px]  max-[415px]:min-w-[350px] max-w-[35%] rounded justify-around flex shadow-2xl px-3">
       <span class="flex-col items-center flex justify-center">
         <h1 class="text-lg font-bold text-[#39A05E]">Dados do Paciente</h1>
         <span class="h-[3px] w-[200px] bg-[#39A05E]"></span>

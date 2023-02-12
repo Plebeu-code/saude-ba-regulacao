@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[150px] w-full  flex fixed bottom-0 justify-center items-center linear-background">
+  <div class="h-[150px] w-full  flex fixed max-[415px]:static bottom-0 justify-center items-center linear-background">
     <img src="/imgs/logo.png" alt="Logo bahia" class="h-[100px]">
   </div>
 </template>

@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@css-render/vue3-ssr": "^0.15.12",
+    "@vueuse/components": "^9.12.0",
     "dotenv": "^16.0.3",
     "knex": "^2.4.2",
     "mysql": "^2.18.1",
