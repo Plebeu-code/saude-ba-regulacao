@@ -3,14 +3,15 @@
     <img src="/imgs/central.png" alt="Logo do estado da bahia" class="h-[200px] top-[-100px] left-[70px] absolute">
     <n-form ref="formRef" :model="formData" :rules="rules"
       class=" w-full flex flex-col justify-center items-center h-[60%]" size="large">
-      <n-form-item label="Informe o Número da Regulação" path="name">
-        <n-input-number class="w-[300px]" :show-button="false" :maxlength="8" v-model:value="formData.name"
-          placeholder="Com o Dígito Verificador (DV)" />
+
+      <n-form-item label="Informe o Número da Regulação" path="name" class="mb-[20px] w-[300px]">
+        <n-input placeholder="a" class="w-full" v-model:value="formData.name" />
       </n-form-item>
-      <VueRecaptcha type="I'm not a robot" theme="dark" @verify="verifyMethod" @error="verifyError" ref="formCaptchaRef" sitekey="6Lf0uHAkAAAAAE0iGoFwkyG19gbO6UhnVJ6DpPNw">
-      </VueRecaptcha>
+
+      <VueRecaptcha @verify="verifyMethod" @error="verifyError" ref="formCaptchaRef"
+        sitekey="6LexP3EkAAAAAN0ByhaeFbnDchRJWkhQU5K58PpT" />
       <n-form-item>
-        <n-button strong color="#39A05E" class="w-[200px] bg-[#39A05E] ">
+        <n-button :disabled="disabledSearch" @click="handlerSubmit" strong color="#39A05E" class="w-[200px] bg-[#39A05E] ">
           Pesquisar
         </n-button>
       </n-form-item>
@@ -20,15 +21,24 @@
 
 <script setup lang="ts">
 import { VueRecaptcha } from 'vue-recaptcha';
-import type { FormInst } from 'naive-ui';
+import type { FormInst, FormRules } from 'naive-ui';
+
 
 const formCaptchaRef = $ref<any>(null)
-
 const formRef = $ref<FormInst | null>(null)
+let disabledSearch = $ref<boolean>(true)
+let verifyCaptch = $ref<any>(null)
+
 let formData = $ref({
-  name: null,
+  name: '',
+  captcha: false,
 })
-let rules = $ref({
+
+watch(formData, () => {
+  formData.name.length > 0 && verifyCaptch.length > 0 ? disabledSearch = false : disabledSearch = true
+})
+
+let rules: FormRules = $ref({
   name: [
     {
       required: true,
@@ -36,35 +46,25 @@ let rules = $ref({
       trigger: ['blur', 'input'],
     },
   ],
+  captcha: [
+    {
+      required: true,
+      message: 'test',
+    }
+  ]
 })
 
-function handlerClick() {
-  console.log(formCaptchaRef.execute());
-  formCaptchaRef.execute()
-
-}
-
 function verifyMethod(token: string) {
-  console.log(token);
+  verifyCaptch = token
 }
 
 function verifyError(error: string) {
   console.log(error);
 }
 
-onMounted(() => {
-  formCaptchaRef.execute()
-  console.log('a');
-})
-
-const size = ref('lg')
-// const handleValidateClick = () => {
-//   formRef.value?.validate((valid) => {
-//     if (valid) {
-//       formData.value = {
-//         name: formRef.value?.getFieldValue('name'),
-//       }
-//     }
-//   })
-// }
+function handlerSubmit() {
+  // formRef.validate().then(() => {
+  //   console.log('validate', formRef.validate())
+  // })
+}
 </script>
