@@ -1,9 +1,28 @@
 <template>
-  <div class="h-[150px] w-full bg-slate-500 flex justify-center items-center">
+  <div class="h-[150px] w-full  flex justify-center items-center linear-background">
     <img src="/imgs/logo.png" alt="Logo bahia" class="h-[100px]">
-</div>
+  </div>
 </template>
 
-<script setup> 
+<style >
+.linear-background {
+  background: linear-gradient(-45deg, #B29547, #759249, #A6326B, #469497);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
 
-</script>
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+</style>
