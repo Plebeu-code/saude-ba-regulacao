@@ -1,6 +1,7 @@
 <template>
   <div class="h-full w-full flex items-center justify-center">
     <div
+      v-motion-slide-visible-once-right
       class="h-[380px] bg-[#FEFCFE] w-[500px]  max-[470px]:w-[80%] mb-[150px] max-[400px]:mb-[0px] rounded relative flex items-end shadow-2xl">
       <img src="/imgs/central.png" alt="Logo do estado da bahia"
         class="h-[130px] top-[-80px] left-[18%]  absolute mb-8 max-[470px]:hidden">
