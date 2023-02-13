@@ -1,6 +1,7 @@
 <template>
+
   <div class="w-screen h-screen max-[400px]:h-auto  bg-[#C9E1E3] items-center justify-center flex flex-col">
-    <div v-if="hasData" class="h-full w-full flex items-center justify-center max-[415px]:my-[100px] mb-[150px] ">
+    <div v-if="hasData" v-motion-slide-visible-once-left class="h-full w-full flex items-center justify-center max-[415px]:my-[100px] mb-[150px] ">
       <ClientOnly>
         <div
           class="h-[550px] bg-[#FEFCFE] flex-col w-[600px] min-w-[400px]  max-[415px]:min-w-[350px] max-w-[35%] rounded justify-around flex shadow-2xl px-3">
@@ -119,32 +120,28 @@
             </n-form-item>
           </n-space>
           <div class="flex w-full justify-center">
-            <n-button disabled strong color="#39A05E" class="w-[200px] bg-[#39A05E] ">
+            <n-button @click="navigateTo('/')" strong color="#39A05E" class="w-[200px] bg-[#39A05E] ">
               Nova Consulta
             </n-button>
           </div>
         </div>
       </ClientOnly>
     </div>
-    <n-card v-else class="w-auto mb-[150px]">
-      <n-result status="404" title="404 Não Encontrado" description="Faça uma nova busca.">
-        <template #footer>
-          <n-button>VOLTAR</n-button>
-        </template>
-      </n-result>
-    </n-card>
-  </div>
+  </div> 
+
   <Footer />
 </template>
 
 <script setup lang="ts">
 
-const route = useRoute()
+definePageMeta({ middleware: "has-regulation-number" })
+
+const id = useCookie("id")
 
 const loading = useLoadingBar()
 
-const { data, pending, error } = await useLazyAsyncData(
-  () => $fetch(`/api/regulation/${route.params.id}`,
+const { data, error } = await useLazyAsyncData<any, any>(
+  () => $fetch("/api/regulation/**",
     {
       responseType: "json",
       onRequest() {
@@ -155,6 +152,9 @@ const { data, pending, error } = await useLazyAsyncData(
       },
       onResponseError() {
         loading.error()
+      },
+      query: {
+        id: id.value
       }
     }
   ),
@@ -173,7 +173,9 @@ const { data, pending, error } = await useLazyAsyncData(
 const hasData = $computed(() => !!data.value)
 
 watch(data, () => {
-  console.log(data.value)
+  console.log(data.value);
+  
+  id.value = null;
 })
 
 watch(error, () => {
