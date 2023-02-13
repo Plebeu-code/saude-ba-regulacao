@@ -5,15 +5,15 @@ export default defineEventHandler(async (event) => {
     .select("*")
     .first()
     .where({ CodOcorrencia: id })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
+      
       throw createError({
         statusCode: 500,
         statusMessage: "Erro interno do servidor"
       })
     })
 
-  console.log(res);
-  
   if (!res) {
     throw createError({
       statusCode: 404,
