@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vueuse/motion/nuxt'
   ],
+  typescript: {
+    shim: false
+  },
   build: {
     transpile:
       process.env.NODE_ENV === 'production'
@@ -32,7 +35,6 @@ export default defineNuxtConfig({
     plugins: [
       Component({
         resolvers: [NaiveUiResolver()],
-        dts: true,
       })
     ],
   },
