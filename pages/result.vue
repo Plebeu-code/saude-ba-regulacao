@@ -141,7 +141,7 @@ const id = useCookie("id")
 const loading = useLoadingBar()
 
 const { data, error } = await useLazyAsyncData<any, any>(
-  () => $fetch("/api/regulation/**",
+  () => $fetch("/api/regulation",
     {
       responseType: "json",
       onRequest() {

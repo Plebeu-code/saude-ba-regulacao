@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-screen bg-[#C9E1E3] items-center flex flex-col">
+  <div v-motion-slide-visible-once-right  class="w-screen h-screen bg-[#C9E1E3] items-center flex flex-col">
     <MyForm :isPending="isPending" :data="formData" @success="execute"/>
     <Footer />
   </div>
@@ -15,12 +15,12 @@ let isPending = $ref<boolean>(false)
 
 let formData = reactive({
   regulationNumber: null,
-  captcha: true,
+  captcha: false,
 })
 
 const { execute, data, error } = useLazyAsyncData<any, any>(
   () => $fetch(
-    "/api/regulation/**", 
+    "/api/regulation", 
     { 
       immediate: false,
       onRequest() {
