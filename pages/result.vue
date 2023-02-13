@@ -139,7 +139,7 @@ const id = useCookie("id")
 
 const loading = useLoadingBar()
 
-const { data, error } = await useLazyAsyncData<any, any>(
+const { data, error, execute } = useAsyncData<any, any>(
   () => $fetch("/api/regulation",
     {
       responseType: "json",
@@ -168,6 +168,8 @@ const { data, error } = await useLazyAsyncData<any, any>(
     default: () => null
   }
 )
+
+onMounted(execute)
 
 const hasData = $computed(() => !!data.value)
 
