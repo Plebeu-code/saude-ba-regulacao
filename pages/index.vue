@@ -15,7 +15,7 @@ let isPending = $ref<boolean>(false)
 
 let formData = reactive({
   regulationNumber: null,
-  captcha: true,
+  captcha: false,
 })
 
 const { execute, data, error } = useLazyAsyncData<any, any>(
