@@ -6,13 +6,13 @@ export async function up(knex: Knex): Promise<void> {
     table.charset("utf8mb4");
 
     table.integer('CodOcorrencia').primary().notNullable();
-    table.string('Paciente', 100).notNullable();
-    table.string('DescMotivoSol', 140).notNullable();
-    table.datetime('DataAbre').notNullable();
-    table.datetime('DataNasc').notNullable();
-    table.datetime('DataRealiza').notNullable();
-    table.string('Município', 103).notNullable();
-    table.string('NmStatusOcorr', 100).notNullable();
+    table.string('Paciente', 100).nullable();
+    table.string('DescMotivoSol', 140).nullable();
+    table.datetime('DataAbre').nullable();
+    table.datetime('DataNasc').nullable();
+    table.datetime('DataRealiza').nullable();
+    table.string('Município', 103).nullable();
+    table.string('NmStatusOcorr', 100).nullable();
   })
 
 }
