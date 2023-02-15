@@ -43,11 +43,12 @@ import type { FormInst, FormRules } from 'naive-ui';
 
 import { VueRecaptcha } from "vue-recaptcha"
 
-let { data, isPending } = defineProps<{
+let { data, isPending, toggleButton } = defineProps<{
   data: {
-    regulationNumber: number,
+    regulationNumber: number | null,
     captcha: boolean,
   },
+  toggleButton: boolean,
   isPending: boolean
 }>()
 
@@ -81,15 +82,6 @@ let formRules: FormRules = $ref<FormRules>({
     },
   ]
 })
-
-// ANCHOR - Calculos
-
-let toggleButton = $computed(() =>
-  (
-    !!data.regulationNumber && data.regulationNumber > 0
-  )
-  && data.captcha
-)
 
 // ANCHOR - Métodos 
 
