@@ -1,11 +1,15 @@
 <template>
   <div class="w-screen h-screen bg-[#C9E1E3] items-center flex flex-col">
-    <MyForm :isPending="isPending" :data="formData" @success="execute"/>
+    <MyForm :isPending="isPending" :data="formData" :toggleButton="toggleButton" @success="handleFormSuccess"/>
     <Footer />
   </div>
 </template>
 <script setup lang="ts">
 import { NAvatar } from 'naive-ui';
+
+/** ANCHOR - Váriaveis */
+
+const { setOccurrence, occurrence } = useOccurrence()
 
 const loading = useLoadingBar()
 
@@ -20,7 +24,7 @@ let formData = reactive({
 
 const { execute, data, error } = useLazyAsyncData<any, any>(
   () => $fetch(
-    "/api/regulation", 
+    `/api/regulation/${occurrence.value}`, 
     { 
       immediate: false,
       onRequest() {
@@ -33,9 +37,6 @@ const { execute, data, error } = useLazyAsyncData<any, any>(
       },
       onRequestError() {
         loading.error()
-      },
-      query: {
-        id: formData.regulationNumber
       }
     },
   ),
@@ -45,24 +46,42 @@ const { execute, data, error } = useLazyAsyncData<any, any>(
   }
 )
 
+/** ANCHOR - Calculos */
+
 let hasData = $computed(() => !!data.value)
 
 let hasError = $computed(() => !!error.value)
 
+let toggleButton = $computed(() =>
+  (
+    !!formData.regulationNumber && formData.regulationNumber > 0
+  )
+  && formData.captcha
+)
+
+/** ANCHOR - Métodos */
+
+function handleFormSuccess() {
+  setOccurrence(formData.regulationNumber!)
+  execute()
+}
+
+/** ANCHOR - Eventos (Life Cycle) */
+
 watch(data, async () => {
   if (hasData) {
-    const id = useCookie("id", { maxAge: 15 })
-
-    id.value = formData.regulationNumber
+    setOccurrence(formData.regulationNumber!)
 
     return navigateTo("/result")
   }
 })
 
 watch(error, () => {
+
   if (hasError) {
-    console.log(error.value);
-  
+    formData.captcha = true;
+    formData.regulationNumber = null;
+
     notification.error({
       content: decodeURI(error.value?.statusMessage!),
       closable: false,
