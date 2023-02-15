@@ -2,7 +2,8 @@ import knexConfig from "~/knexfile"
 import knex from 'knex';
 
 export enum DatabaseTables {
-  'V_Minha_Regulacao'
+  'V_Minha_Regulacao',
+  "audit"
 }
 
 const knexApplication = knex(knexConfig[process.env.NODE_ENV ?? "production"])

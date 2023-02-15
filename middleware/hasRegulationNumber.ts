@@ -1,8 +1,8 @@
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
 
-  const hasRegulation = !!useCookie("id").value
-  
-  if (!hasRegulation && to.path !== "/") {
+  const { hasOccurence } = useOccurrence()
+
+  if (!hasOccurence.value && to.path !== "/") {
     return navigateTo("/")
   }
 

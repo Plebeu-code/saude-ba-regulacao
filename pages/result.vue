@@ -17,7 +17,7 @@
             <span class="flex-col items-center flex justify-center">
               <h1 class="text-lg font-bold text-[#39A05E]">Dados do Paciente</h1>
               <span class="h-[3px] w-[200px] bg-[#39A05E]"></span>
-            </span>
+            </span> 
             <n-space vertical>
               <n-form-item label="Número da Ocorrência" class="flex flex-col">
                 <n-input readonly :value="data!.CodOcorrencia" placeholder="Não cadastrado!">
@@ -142,16 +142,17 @@
 
 <script setup lang="ts">
 
-definePageMeta({ 
-  middleware: "has-regulation-number",
-})
+definePageMeta({ middleware: "has-regulation-number" })
 
-const id = useCookie("id")
+/** ANCHOR - Váriaveis */
 
-const loading = useLoadingBar()
+const { occurrence: occurrence, hasOccurence, delOccurrence, reFetchOcorrence } = useOccurrence()
+
+const loading = useLoadingBar() 
 
 const { data, error, execute } = useAsyncData<any, any>(
-  () => $fetch("/api/regulation",
+  () => $fetch(
+    `/api/regulation/${occurrence.value}`,
     {
       responseType: "json",
       onRequest() {
@@ -162,9 +163,6 @@ const { data, error, execute } = useAsyncData<any, any>(
       },
       onResponseError() {
         loading.error()
-      },
-      query: {
-        id: id.value
       }
     }
   ),
@@ -190,17 +188,28 @@ const { data, error, execute } = useAsyncData<any, any>(
   }
 )
 
-onMounted(execute)
+const hasError = $computed(() => !!error.value)
 
-const hasData = $computed(() => true)
+/** ANCHOR - Eventos (Life Cycle) */
 
+onMounted(() => {
+  reFetchOcorrence()
+  if (hasOccurence) execute()
+})
+
+// Caso haja uma ocorrência, ele deletará.
 watch(data, () => {
-  id.value = null;
+  delOccurrence()
 })
 
 watch(error, () => {
-  console.log(error.value)
+  if (hasError) {
+    console.log(error.value)
+    navigateTo("/")
+  }
 })
+
+/** ANCHOR - Tipagens */
 
 interface ResponseData {
   CodOcorrencia: number,
