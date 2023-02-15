@@ -1,6 +1,6 @@
 <template>
   <div class="h-[150px] w-full  flex fixed max-[415px]:static bottom-0 justify-center items-center linear-background">
-    <img src="/imgs/logo.png" alt="Logo bahia" class="h-[100px]">
+    <nuxt-img src="/imgs/logo.png" alt="Logo bahia" class="h-[100px]" loading="lazy" />
   </div>
 </template>
 
