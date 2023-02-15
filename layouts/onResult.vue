@@ -4,23 +4,42 @@
 
 <script lang="ts" setup>
 
-let joinAt = Date.now()
+const { occurrence } = useOccurrence()
 
-const occurrence = useCookie("id")
+const userData = $ref<{
+  joinAt: number,
+  occurrence: number | null,
+  address: string | null,
+  isMobile: boolean
+}>({
+  joinAt: Date.now(),
+  occurrence: null,
+  address: null,
+  isMobile: false
+})
 
-const address = window.location.hostname ?? "unknown"
+onMounted(() => {
 
-const isMobile = navigator.userAgent.indexOf("mobi") !== -1
+  userData.joinAt = Date.now()
+  userData.occurrence = occurrence.value
+  userData.address = window.location?.hostname ?? "unknown"
+  userData.isMobile = navigator.userAgent.indexOf("mobi") !== -1
+  
+})
+
 
 onUnmounted(() => {
   
-  const uptime = Date.now() - joinAt
+  const uptime = Date.now() - userData.joinAt
 
-  console.log(uptime);
+  useFetch('/api/audit/**', {
+    method: "POST",
+    body: {
+      ...userData,
+      uptime
+    }
+  })
 
-  console.log(isMobile);
-  
-  console.log(address, occurrence.value);
-})
+}) 
 
 </script>
